@@ -1,5 +1,6 @@
 package com.voxloud.provisioning.repository;
 
+import static com.voxloud.provisioning.util.TestUtils.MAC_ADDRESS_DESK_WITHOUT_FRAGMENT;
 import static com.voxloud.provisioning.util.TestUtils.MAC_ADDRESS_NOT_VALID;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,8 @@ class DeviceRepositoryTest {
 
     @Test
     void findById_withValidMacAddress_returnDevice() {
-        Optional<Device> optionalWithDevice = deviceRepository.findById("aa-bb-cc-dd-ee-ff");
+        Optional<Device> optionalWithDevice =
+                deviceRepository.findById(MAC_ADDRESS_DESK_WITHOUT_FRAGMENT);
         assertThat(optionalWithDevice).isNotEmpty();
         Device device = optionalWithDevice.get();
         assertThat(device.getUsername()).isNotNull();

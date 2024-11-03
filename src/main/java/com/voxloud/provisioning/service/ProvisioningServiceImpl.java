@@ -25,6 +25,7 @@ public class ProvisioningServiceImpl implements ProvisioningService {
     private final ConfigurationModelWritingStrategy configWriterStrategy;
     private final ConfigurationModel configurationModel;
 
+    @Override
     public String getProvisioningFile(String macAddress) {
         Device device = deviceRepository.findById(macAddress)
                 .orElseThrow(() -> new DeviceNotFoundException(Utils.REQUEST_DENIED));

@@ -1,11 +1,11 @@
 package com.voxloud.provisioning.strategy.configwriter.impl;
 
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.codecs;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.domain;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.password;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.port;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.timeout;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.username;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.CODECS;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.DOMAIN;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PASSWORD;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PORT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.TIMEOUT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.USERNAME;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,18 +66,18 @@ public class ConferenceConfigurationWriter extends AbstractConfigurationWriter {
         public void serialize(ConfigurationModel model, JsonGenerator gen,
                 SerializerProvider provider) throws IOException {
             gen.writeStartObject();
-            gen.writeStringField(username.name(), model.getUsername());
-            gen.writeStringField(password.name(), model.getPassword());
-            gen.writeStringField(domain.name(), model.getDomain());
-            gen.writeStringField(port.name(), model.getPort());
+            gen.writeStringField(USERNAME.getFieldName(), model.getUsername());
+            gen.writeStringField(PASSWORD.getFieldName(), model.getPassword());
+            gen.writeStringField(DOMAIN.getFieldName(), model.getDomain());
+            gen.writeStringField(PORT.getFieldName(), model.getPort());
 
             String codecsString = model.getCodecs().stream().map(s -> "\"" + s + "\"")
                     .collect(Collectors.joining(",", "[", "]"));
-            gen.writeFieldName(codecs.name());
+            gen.writeFieldName(CODECS.getFieldName());
             gen.writeRawValue(codecsString);
 
             if (model.getTimeout() != null) {
-                gen.writeNumberField(timeout.name(), model.getTimeout());
+                gen.writeNumberField(TIMEOUT.getFieldName(), model.getTimeout());
             }
             gen.writeEndObject();
         }

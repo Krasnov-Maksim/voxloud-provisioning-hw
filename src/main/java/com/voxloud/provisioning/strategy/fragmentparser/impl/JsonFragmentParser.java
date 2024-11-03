@@ -1,9 +1,11 @@
 package com.voxloud.provisioning.strategy.fragmentparser.impl;
 
+import static com.voxloud.provisioning.util.Utils.JSON_PARSING_ERROR;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.voxloud.provisioning.exception.FragmentParsingException;
 import com.voxloud.provisioning.model.ConfigurationModel;
-import com.voxloud.provisioning.util.Utils;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -30,8 +32,8 @@ public class JsonFragmentParser extends AbstractFragmentParser {
         try {
             return new ObjectMapper().readValue(getFragment(), ConfigurationModel.class);
         } catch (JsonProcessingException e) {
-            log.error(Utils.JSON_PARSING_ERROR);
-            throw new RuntimeException(e);
+            log.error(JSON_PARSING_ERROR);
+            throw new FragmentParsingException(JSON_PARSING_ERROR);
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.voxloud.provisioning.service;
 
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.codecs;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.domain;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.password;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.port;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.timeout;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.username;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.CODECS;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.DOMAIN;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PASSWORD;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PORT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.TIMEOUT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.USERNAME;
 import static com.voxloud.provisioning.util.TestUtils.DESK_OVERRIDE_FRAGMENT;
 import static com.voxloud.provisioning.util.TestUtils.EXPECTED_DESK_WITH_FRAGMENT;
 import static com.voxloud.provisioning.util.TestUtils.MAC_ADDRESS_DESK_WITH_FRAGMENT;
@@ -98,14 +98,14 @@ class ProvisioningServiceTest {
         doReturn(10).when(configurationModel).getTimeout();
 
         doAnswer((Answer<Void>) invocation -> {
-            ReflectionTestUtils.setField(configurationModel, username.name(), "walter");
+            ReflectionTestUtils.setField(configurationModel, USERNAME.getFieldName(), "walter");
             return null;
         })
                 .when(configurationModel)
                 .setUsername(anyString());
 
         doAnswer((Answer<Void>) invocation -> {
-            ReflectionTestUtils.setField(configurationModel, password.name(), "white");
+            ReflectionTestUtils.setField(configurationModel, PASSWORD.getFieldName(), "white");
             return null;
         })
                 .when(configurationModel)
@@ -133,11 +133,11 @@ class ProvisioningServiceTest {
 
         doAnswer((Answer<Void>) invocation -> {
             ArrayList<String> codecsList = createCodecList();
-            ReflectionTestUtils.setField(configurationModel, domain.name(),
+            ReflectionTestUtils.setField(configurationModel, DOMAIN.getFieldName(),
                     "sip.anotherdomain.com");
-            ReflectionTestUtils.setField(configurationModel, port.name(), "5161");
-            ReflectionTestUtils.setField(configurationModel, codecs.name(), codecsList);
-            ReflectionTestUtils.setField(configurationModel, timeout.name(), 10);
+            ReflectionTestUtils.setField(configurationModel, PORT.getFieldName(), "5161");
+            ReflectionTestUtils.setField(configurationModel, CODECS.getFieldName(), codecsList);
+            ReflectionTestUtils.setField(configurationModel, TIMEOUT.getFieldName(), 10);
 
             return null;
         })

@@ -49,6 +49,17 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .body(body);
     }
 
+    @ExceptionHandler(FragmentParsingException.class)
+    protected ResponseEntity<Object> handleFragmentParsingException(
+            FragmentParsingException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(MESSAGE, Utils.INTERNAL_SERVER_ERROR);
+        body.put(TIMESTAMP, LocalDateTime.now());
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(body);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     protected ResponseEntity<Object> handleRuntimeExceptionException(RuntimeException ex) {
         log.error(ex.getMessage());

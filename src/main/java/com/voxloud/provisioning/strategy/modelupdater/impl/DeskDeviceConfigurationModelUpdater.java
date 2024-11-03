@@ -1,11 +1,11 @@
 package com.voxloud.provisioning.strategy.modelupdater.impl;
 
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.codecs;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.domain;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.password;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.port;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.timeout;
-import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.username;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.CODECS;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.DOMAIN;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PASSWORD;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.PORT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.TIMEOUT;
+import static com.voxloud.provisioning.model.ConfigurationModel.FieldNames.USERNAME;
 
 import com.voxloud.provisioning.exception.IncompatibleTypeOfDataException;
 import com.voxloud.provisioning.model.ConfigurationModel;
@@ -37,18 +37,18 @@ public class DeskDeviceConfigurationModelUpdater extends AbstractConfigurationMo
     @Override
     public void updateModel() {
         properties.forEach((key, value) -> {
-            if (username.name().equals(key)) {
+            if (USERNAME.getFieldName().equals(key)) {
                 getModel().setUsername((String) value);
-            } else if (password.name().equals(key)) {
+            } else if (PASSWORD.getFieldName().equals(key)) {
                 getModel().setPassword((String) value);
-            } else if (domain.name().equals(key)) {
+            } else if (DOMAIN.getFieldName().equals(key)) {
                 getModel().setDomain((String) value);
-            } else if (port.name().equals(key)) {
+            } else if (PORT.getFieldName().equals(key)) {
                 getModel().setPort((String) value);
-            } else if (codecs.name().equals(key)) {
+            } else if (CODECS.getFieldName().equals(key)) {
                 getModel().setCodecs(
                         new ArrayList<>(Arrays.asList(((String) value).split(","))));
-            } else if (timeout.name().equals(key)) {
+            } else if (TIMEOUT.getFieldName().equals(key)) {
                 getModel().setTimeout(Integer.valueOf((String) value));
             }
         });

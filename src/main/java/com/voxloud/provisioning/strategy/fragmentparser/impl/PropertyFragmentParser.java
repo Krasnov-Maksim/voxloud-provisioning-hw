@@ -1,6 +1,8 @@
 package com.voxloud.provisioning.strategy.fragmentparser.impl;
 
-import com.voxloud.provisioning.util.Utils;
+import static com.voxloud.provisioning.util.Utils.PROPERTIES_PARSING_ERROR;
+
+import com.voxloud.provisioning.exception.FragmentParsingException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
@@ -33,8 +35,8 @@ public class PropertyFragmentParser extends AbstractFragmentParser {
             properties.load(new StringReader(getFragment()));
             return properties;
         } catch (IOException e) {
-            log.error(Utils.PROPERTIES_PARSING_ERROR);
-            throw new RuntimeException(e);
+            log.error(PROPERTIES_PARSING_ERROR);
+            throw new FragmentParsingException(PROPERTIES_PARSING_ERROR);
         }
     }
 }

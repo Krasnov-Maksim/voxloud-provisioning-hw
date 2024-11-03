@@ -11,9 +11,4 @@ public abstract class AbstractConfigurationModelUpdater implements Configuration
     protected AbstractConfigurationModelUpdater(ConfigurationModel model) {
         this.model = model;
     }
-
-    @Override
-    public void updateModel() {
-
-    }
 }

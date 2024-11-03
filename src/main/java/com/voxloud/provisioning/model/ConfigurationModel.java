@@ -3,6 +3,7 @@ package com.voxloud.provisioning.model;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -37,11 +38,18 @@ public class ConfigurationModel {
     }
 
     public enum FieldNames {
-        username,
-        password,
-        domain,
-        port,
-        codecs,
-        timeout
+        USERNAME("username"),
+        PASSWORD("password"),
+        DOMAIN("domain"),
+        PORT("port"),
+        CODECS("codecs"),
+        TIMEOUT("timeout");
+
+        FieldNames(String fieldName) {
+            this.fieldName = fieldName;
+        }
+
+        @Getter
+        private final String fieldName;
     }
 }
