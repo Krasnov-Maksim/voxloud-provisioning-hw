@@ -10,6 +10,7 @@ public class Utils {
             "Data should be of type ConfigurationModel.";
     public static final String DATA_SHOULD_BE_OF_TYPE_PROPERTIES =
             "Data should be of type Properties.";
+    public static final String MAC_ADDRESS_REGEXP = "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$";
 
     private Utils() {
     }

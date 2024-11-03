@@ -1,6 +1,12 @@
 package com.voxloud.provisioning.controller;
 
+import static com.voxloud.provisioning.util.Utils.MAC_ADDRESS_REGEXP;
+import static com.voxloud.provisioning.util.Utils.REQUEST_DENIED;
+
+import com.voxloud.provisioning.exception.DeviceNotFoundException;
 import com.voxloud.provisioning.service.ProvisioningService;
+import java.util.regex.Pattern;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -19,7 +25,16 @@ public class ProvisioningController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/provisioning/{macAddress}")
-    public String getProvisioning(@PathVariable String macAddress) {
+    public String getProvisioning(@PathVariable @Valid String macAddress) {
+        if (!isValidMacAddress(macAddress)) {
+            throw new DeviceNotFoundException(REQUEST_DENIED);
+        }
         return provisioningService.getProvisioningFile(macAddress);
+    }
+
+    private boolean isValidMacAddress(String macAddress) {
+        return Pattern.compile(MAC_ADDRESS_REGEXP)
+                .matcher(macAddress)
+                .matches();
     }
 }

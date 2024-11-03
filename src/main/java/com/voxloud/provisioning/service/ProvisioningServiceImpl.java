@@ -1,5 +1,7 @@
 package com.voxloud.provisioning.service;
 
+import static com.voxloud.provisioning.util.Utils.REQUEST_DENIED;
+
 import com.voxloud.provisioning.entity.Device;
 import com.voxloud.provisioning.exception.DeviceNotFoundException;
 import com.voxloud.provisioning.model.ConfigurationModel;
@@ -10,7 +12,6 @@ import com.voxloud.provisioning.strategy.fragmentparser.FragmentParser;
 import com.voxloud.provisioning.strategy.fragmentparser.FragmentParsingStrategy;
 import com.voxloud.provisioning.strategy.modelupdater.ConfigurationModelUpdater;
 import com.voxloud.provisioning.strategy.modelupdater.ConfigurationModelUpdatingStrategy;
-import com.voxloud.provisioning.util.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ProvisioningServiceImpl implements ProvisioningService {
     @Override
     public String getProvisioningFile(String macAddress) {
         Device device = deviceRepository.findById(macAddress)
-                .orElseThrow(() -> new DeviceNotFoundException(Utils.REQUEST_DENIED));
+                .orElseThrow(() -> new DeviceNotFoundException(REQUEST_DENIED));
         updateConfigurationModel(device, configurationModel);
         ConfigurationWriter writer = configWriterStrategy.getWriter(device, configurationModel);
         return writer.write();
